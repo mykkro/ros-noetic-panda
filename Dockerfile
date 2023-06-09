@@ -32,10 +32,13 @@ RUN dpkg -i libfranka*.deb
 WORKDIR $WORKSPACE
 
 COPY starttmux.sh /root/starttmux.sh
-COPY killtmux.sh /root/killtmux.sh
-COPY setup-franka.sh /root/setup-franka.sh
+COPY bye.sh /root/bye.sh
 
+COPY setup-franka.sh /root/setup-franka.sh
 RUN /bin/bash -c "/root/setup-franka.sh"
+
+COPY setup-mamba.sh /root/setup-mamba.sh
+RUN /bin/bash -c "/root/setup-mamba.sh"
 
 RUN echo "source /opt/ros/noetic/setup.sh" >> ~/.bashrc
 RUN echo "source /root/ros_ws/devel/setup.sh" >> ~/.bashrc
